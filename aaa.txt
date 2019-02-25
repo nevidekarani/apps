@@ -1,1 +1,524 @@
 
+Design pattern: -
+	Singleton
+	Factory
+	Spring MVC 
+
+Singleton
+Only one object is exist throughout the application or in jVM
+Uses:-
+Java.lange.Runtime;
+Java.awt.Desktop;
+
+
+
+Class Singleton
+
+
+
+Array List & vector:
+•	Array list is much faster than vector
+•	Arraylist is non synchronized.
+•	Multiple threads can access
+•	50% Growing 
+•	Vector legacy class
+
+Properties Class:
+•	Is used for constants in form of kay value.
+•	Java.util
+
+Comparable & Comparator: -
+•	 Comparable is used when we want to do single sorting sequence.
+•	Only one object is comparing
+•	compareTo(Object ob)
+•	collections.sort(list)
+•	java.lang
+
+
+2.Comparable:-
+
+import java.util.*;
+class SortElement implements Comparable<SortElement>
+{
+public String name;
+public String address;
+SortElement(String name,String address)
+{
+    this.name=name;
+    this.address=address;
+}
+public int compareTo(SortElement e)
+{
+ //return name.compareTo(e.name);
+ return address.compareTo(e.address);
+}
+
+}
+public class SortElementExcution
+{
+    
+    public static void main(String args[])
+    {
+      
+        List<SortElement> elements=new ArrayList<SortElement>();
+        elements.add(new SortElement("nevideka","bb"));
+        elements.add(new SortElement("aman","cc"));
+         elements.add(new SortElement("suraj","aa"));
+         elements.add(new SortElement("lovedeep","mm"));
+      
+      Collections.sort(elements);
+      for(SortElement elemnt: elements)
+      {
+          
+             System.out.println("elements.size:::::::::::"+elemnt.name);   
+           System.out.println("elements.size:::::::::::"+elemnt.address);   
+               
+      }
+   
+    }
+    
+}
+/////////////////////////////////////////////////////////////////////////////////
+Wrapper classes and string class already implemented from Comparable interface so when we use collections. Sort(String or Integer) ,we will get sorted data.
+
+If we want to sort the elemnets in reverse order we will use collections.sort(list,collections.reverseOrder());
+
+/////////////////////////////////////////////////////////////
+3.Comparator
+import java.util.*;
+class SortElement
+{
+public String name;
+public String address;
+SortElement(String name,String address)
+{
+    this.name=name;
+    this.address=address;
+}
+
+}
+class NameComparator implements Comparator
+{
+    
+  public int compare(Object comp1,Object comp2)
+  {
+      SortElement ob1=(SortElement)comp1;
+      SortElement ob2=(SortElement)comp2;
+      return ob1.name.compareTo(ob2.name);
+  }
+}
+class CityComparator implements Comparator
+{
+    
+  public int compare(Object comp1,Object comp2)
+  {
+       SortElement ob1=(SortElement)comp1;
+      SortElement ob2=(SortElement)comp2;
+      return ob1.address.compareTo(ob2.address);
+  }
+}
+public class SortElementExcution
+{
+    
+    public static void main(String args[])
+    {
+      
+        List<SortElement> elements=new ArrayList<SortElement>();
+        elements.add(new SortElement("nevideka","bb"));
+        elements.add(new SortElement("aman","cc"));
+         elements.add(new SortElement("suraj","aa"));
+         elements.add(new SortElement("lovedeep","mm"));
+      
+      Collections.sort(elements,new NameComparator());
+      for(SortElement elemnt: elements)
+      {
+         System.out.println("NameComparator:::::::::::"+elemnt.name);   
+        System.out.println("NameComparator:::::::::::"+elemnt.address);   
+               
+      }
+    Collections.sort(elements,new CityComparator());
+     for(SortElement elemnt: elements)
+      {
+         System.out.println("CityComparator:::::::::::"+elemnt.name);   
+        System.out.println("CityComparator:::::::::::"+elemnt.address);   
+               
+      }
+    }
+    
+}
+
+
+///////////////////////////////////////////////////
+
+
+Only we need to sort List elements in collection because for set we have already used tree set to sort elements
+
+/////////////////////////////////////////////////////////////
+4. Collections Class and extends from object class
+Contains static method like min().max(), addAll(;
+5. EnumMap[1.5]:
+Map(I)
+->
+AbstractMap(C)
+->
+EnumMap[1.5]
+
+import java.util.*;
+
+public class SortElementExcution
+{
+    
+   enum Days
+{
+  MONDAY,TUESDAY,THURSDAY,FRIDAY
+    
+};
+    public static void main(String args[])
+    {
+      
+        EnumMap<Days,String> elements=new EnumMap<Days,String>(Days.class);
+        elements.put(Days.MONDAY,"nevideka");
+        elements.put(Days.TUESDAY,"aman");
+         elements.put(Days.THURSDAY,"suraj");
+         elements.put(Days.FRIDAY,"lovedeep");
+
+     for(Map.Entry m:elements.entrySet())
+     {
+              System.out.println(":::::::::key:::"+m.getKey());
+               System.out.println(":::::::::key:::"+m.getValue());
+     }
+      }
+    }
+
+
+/////////////////////////////////////////////////////////////////
+
+6. EnumSet[1.5]
+import java.util.*;
+
+public class HelloWorld{
+  enum days
+{
+  MONDAY,TUESDAY,THURSDAY,FRIDAY
+    
+};
+    public static void main(String args[])
+    {
+           Set<days> set = EnumSet.allOf(days.class);  
+      
+     // Set<days> set = EnumSet.of(days.TUESDAY, days.FRIDAY);  
+       Iterator<days> itr=set.iterator();
+   while(itr.hasNext())
+     {
+              System.out.println(":::::::::value:::"+itr.next());
+               
+      }
+    }
+}
+////////////////////////////////////////
+7.HashTable[legacy class]  & HashMap[1.2] 
+
+HashMap[1.2] is not synchronized while hash table[legacy class] is synchronized 
+hashmap is faster as compared to hashtable.
+multiple thread can access on same time in hashmap
+one null key  and multiple null values we can add in hash map but not in hashtable
+HashMap is inherited from AbstractMap class while hashtable from Dictionary class
+Note:-A fail-fast system is nothing but immediately report any failure that
+is likely to lead to failure. When a problem occurs, a fail-fast system
+fails immediately. In Java, we can find this behavior with iterators.
+Incase, you have called iterator on a collection object, and another
+thread tries to modify the collection object, then concurrent modification
+exception will be thrown. This is called fail-fast.
+HashMap and Hashtable both are used to store data in key and value form. Both are using hashing technique to store unique keys.
+8.HashMAP:-
+
+
+import java.util.*;
+
+public class HelloWorld{
+
+    public static void main(String args[])
+    {
+          Map<Integer,String> hashTable =new HashMap<Integer,String>(); 
+  
+    hashTable.put(1,null);
+    hashTable.put(2,null);
+    hashTable.put(null,null);
+   /* hashTable.put(null,null);
+    hashTable.put(null,null);*/
+  for(Map.Entry m:hashTable.entrySet())
+     {
+              System.out.println(":::::::::key:::"+m.getKey());
+                   System.out.println(":::::::::value:::"+m.getValue());
+      }
+    }
+}
+
+9.Hashtable
+import java.util.*;
+
+public class HelloWorld{
+
+    public static void main(String args[])
+    {
+          Hashtable<Integer,String> hashTable =new Hashtable<Integer,String>(); 
+  
+    hashTable.put(1,null);
+    hashTable.put(2,null);
+  //  hashTable.put(null,null);
+  for(Map.Entry m:hashTable.entrySet())
+     {
+              System.out.println(":::::::::key:::"+m.getKey());
+                   System.out.println(":::::::::value:::"+m.getValue());
+      }
+    }
+}
+10. TreeMap[1.5]
+red black tree data structure
+
+Map(I)
+|
+SortedMap[1.5](I)
+|
+Navigational Map[1.5](I)
+|
+TreeMap[1.5] (c)
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        System.out.println("Hello World");
+        SortedMap<Integer,String> map=new TreeMap<Integer,String>();
+      //  map.put(null,"bb"); not allowed
+        map.put(1,"cc");
+        map.put(3,"aa");
+        map.put(4,"dd");
+      for(Map.Entry m: map.entrySet())
+       {
+         //   System.out.println("SortedData:::::::::::"+m.getKey());
+            System.out.println("SortedData:::::::::::"+m.getValue());
+       }
+       
+      
+     }
+}
+
+
+
+Navigational Map[1.5](I):-
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        System.out.println("Hello World");
+        NavigableMap<Integer,String> map=new TreeMap<Integer,String>();
+      //  map.put(null,"bb"); not allowed
+        map.put(1,"cc");
+        map.put(3,"aa");
+        map.put(4,"dd");
+        
+         System.out.println("navigationMap data::::::::::Returns key-value pairs whose keys are less than the specified key"+map.headMap(2));
+         System.out.println("navigationMap data::::::::::Returns key-value pairs whose keys are greater than the specified key"+map.tailMap(2));
+         System.out.println("navigationMap data::::::::::Returns key-value pairs exists in between the specified key"+map.subMap(1,3));
+         
+      for(Map.Entry m: map.entrySet())
+       {
+         //   System.out.println("SortedData:::::::::::"+m.getKey());
+            System.out.println("SortedData:::::::::::"+m.getValue());
+       }
+       
+      
+     }
+}
+
+
+Java LinkedHashMap class[1.5](C)
+o	The initial default capacity of Java HashMap class is 16 with a load factor of 0.75.
+
+Hashtable and Linked list 
+Map(I)
+|
+AbstractMap[1.5](C)
+|
+Hash Map[1.5](C)
+|
+LinkedHashMap[1.5] (C)
+o	Java LinkedHashMap maintains insertion order.
+
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        System.out.println("Hello World");
+        HashMap<Integer,String> map=new LinkedHashMap<Integer,String>();
+       map.put(null,null); //not allowed
+        map.put(1,"cc");
+        map.put(3,"aa");
+        map.put(4,"dd");
+        map.put(2,"mm");
+         // map.put(2,"dd");
+      for(Map.Entry m: map.entrySet())
+       {
+           System.out.println("key::::::::::"+m.getKey()+":::::Value::::::::"+m.getValue());
+            
+       }
+       
+      
+     }
+}
+HashMap:-
+
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        System.out.println("Hello World");
+        HashMap<Integer,String> map=new HashMap<Integer,String>();
+       map.put(null,null); //not allowed
+        map.put(1,"cc");
+        map.put(3,"aa");
+        map.put(8,"dd");
+        map.put(6,"mm");
+         // map.put(2,"dd");
+      for(Map.Entry m: map.entrySet())
+       {
+           System.out.println("key::::::::::"+m.getKey()+":::::Value::::::::"+m.getValue());
+            
+       }
+       
+      
+     }
+}
+
+Generics:-[1.5]
+Introduced in java 1.5 and Deals with the type safety objects. using generics we can define the what type of the objects we are putting in the collection either string type, integer and we can handle problem on compile time rather than run time.
+If we declare generics, only one type of objects you can put in the collection.
+List<String> list = new ArrayList<String>();  
+list.add("hello");  
+list.add(32);//Compile Time Error  
+No need to cast the elements in generics
+1.	List list = new ArrayList();  
+2.	list.add("hello");  
+3.	String s = (String) list.get(0);//typecasting  
+
+
+////////////////////////////////////// HIBERANATE /////////////////////////////////////////////
+
+Hibernate:-
+Java(objects)-> Mapping tool(ORM)->Database(Relation[rows and columns])
+Oops concept, core java, connectivity (jdbc) and sql
+
+
+//////////////////AWS//////////////////////////////////////////
+Cloud computing 
+Instead of buy the server take the server on rent.
+Don’t need to manage the updation, security automatically manager by cloud provider just you need to choose best cloud provider
+AWS-2006 in market
+Ajure-2010
+AWS-Store ,manage ,process the data on remote
+Use can pay acc. to your usage
+AWS Market share -31 %, ALL-69%
+Server capacity of AWS 6x% over X individual  
+Flexibility like pay acc. To usage means acc. To hours.
+AWS secure cloud services platform it offer cloud services like compute data and host the other domain.
+
+
+Different domains IN AWS
+Compute:-
+Ec2 just like raw server or PC
+Just like Fresh PC. On this you can install OS, Software
+Migration:-
+To transfer the data from AWS or vice versa
+It is just like hard disk to send the data physically
+Security & Identity Compliance 
+IAM -> if you have three instance and you want to give the user one permission only for instance 1 and user 2 for instance 2 and user3 has all permission for all instance   
+Storage-
+S3
+We store the files in file system means storage
+Object based storage
+Database 
+can’t include executable files it will store only link ont image file so we need to store the image in storage and in database just we need to store the link for the image
+Messaging
+Email server
+ Emails to send the bulk users 
+You can handle the replied as well as
+Database 
+To manage mysql
+Management tool
+ Manager aws resource like Cloud watch
+Networking and content delivery 
+
+
+AWS Services:-
+Compute:-
+
+EC2->Raw server
+Resize ur server or increase the configuration 
+Lambda->Advance of EC2 only execute background task
+There are trigger and it execute the code example.
+If we upload the image by application and perform background task like image compress,
+Elastic beanstalk-> limited environment 
+Advance version of Ec2.it is used to host the application.
+Elastic beanstalk automatic form of ec2
+No need to create the environment Automatically you can select the environment.
+Code-> java
+	PHP
+	-> python 
+	Need to create environment first but with ec2 Automatically you can select the environment.
+	
+Elastic workload: -
+Distribute the workload among the instances. So that we will get the same response time.
+Order scaling: -
+Suppose CPU utilization go beyond 50% it will decrease the server.
+Automatically up and down.
+Security group in AWS controls the inbound and outbound traffic
+
+By default password for instance administrator 
+
+
+Storage domain(S3): -
+First root folder is called bucket in bucket you need on put objects i.e files.
+All files are loaded as objects 
+Content delivery management: -
+Cloud front is Content delivery management using this we Accessing the web site which is very far away from user location why we are doing this to decrease response time.
+Edge location:- name give to service
+Elastic block storage: -
+
+Hard drive for Ec2
+Multiple EBS volume connected to Ec2
+Glacier:-
+We can store the data in glacier which is not frequently used data. it is cheaper.
+Snowball:-
+Physically device to transfer the data from aws or vice versa.
+We used this when large amount of data.
+Faster and data transfer in bulk.
+Suppose u have existing application running on server now you want to use aws and u have lot of existing data using this device you can transfer the data.
+Storage gateways:-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
